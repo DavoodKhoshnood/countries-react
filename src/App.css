@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 8vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.card-body {
+  border: none;
+  min-width: 220px;
+  min-height: 320px;
+  margin: 10px;
+}
+
+.card-body img {
+  border-radius: 6px;
+  width: 200px;
+  height: 140px;
+}
+
+.content {
+  padding: 20px;
 }
