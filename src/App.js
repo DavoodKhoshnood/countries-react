@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Card from './Card'
-import countriesAll from './countriesAll.json'
-import './App.css'
+import CountriesList from './components/CountriesList';
+import countriesAll from './countriesAll.json';
+import './App.css';
+import Header from './components/Header';
+import Country from './components/Country';
 
 function App() {
-  const regions = [...new Set(countriesAll.map((country) => country.region))]
-  const [countries, setCountries] = useState(countriesAll)
-  const [regionsFilter, setRegionsFilter] = useState('All regions')
-  const [countriesFilter, setCountriesFilter] = useState('')
+  const regions = [...new Set(countriesAll.map((country) => country.region))];
+  const [countries, setCountries] = useState(countriesAll);
+  const [regionsFilter, setRegionsFilter] = useState('All regions');
+  const [countriesFilter, setCountriesFilter] = useState('');
 
   useEffect(() => {
-    console.log(countriesFilter)
+    console.log(countriesFilter);
     setCountries(
       countriesAll.filter(
         (country) =>
@@ -22,49 +25,34 @@ function App() {
           (countriesFilter === '' ||
             country.name
               .toLocaleLowerCase()
-              .includes(countriesFilter.toLocaleLowerCase())),
-      ),
-    )
-  }, [regionsFilter, countriesFilter])
+              .includes(countriesFilter.toLocaleLowerCase()))
+      )
+    );
+  }, [regionsFilter, countriesFilter]);
 
   return (
-    <>
-      <Heading />
-      <div className="form-row m-5">
-        <input
-          id="input"
-          className="form-control col-md-9 m-2"
-          type="search"
-          placeholder="Search..."
-          onChange={(e) => setCountriesFilter(e.target.value)}
+    <Router>
+      <Header />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <CountriesList
+              countries={countries}
+              regions={regions}
+              setCountriesFilter={setCountriesFilter}
+              setRegionsFilter={setRegionsFilter}
+            />
+          }
         />
-
-        <select
-          id="select"
-          onChange={(e) => setRegionsFilter(e.target.value)}
-          className="form-control col-md-2 m-2"
-        >
-          <option>All regions</option>
-          {regions.map((region) => (
-            <option>{region}</option>
-          ))}
-        </select>
-      </div>
-      <div className="card-deck p-1">
-        {countries.map((country, index) => (
-          <Card data={country} index={index} />
-        ))}
-      </div>
-    </>
-  )
+        <Route
+          path="/countries/:countryName"
+          element={<Country countries={countries} />}
+        />
+      </Routes>
+      {/* <CountriesList countries={countries} /> */}
+    </Router>
+  );
 }
 
-const Heading = () => {
-  return (
-    <div className="App">
-      <header className="App-header">Where in the world?</header>
-    </div>
-  )
-}
-
-export default App
+export default App;

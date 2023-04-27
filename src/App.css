@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   min-height: 8vh;
   display: flex;
@@ -24,34 +13,27 @@
   border-bottom: 1px solid rgb(220, 219, 219);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .card-body {
-  border: none;
   min-width: 260px;
   min-height: 320px;
-  margin: 10px;
+  justify-content: space-between;
 }
 
 .card-body img {
   border-radius: 6px;
-  width: 200px;
-  height: 140px;
+}
+
+.card-deck {
+  row-gap: 1rem;
+}
+
+.card:hover {
+  box-shadow: 10px 10px 10px gray;
 }
 
 .content {
   padding: 20px;
+  bottom: 0px;
 }
 
 .country-detail {
@@ -64,6 +46,5 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* background-color: rgb(255, 255, 255); */
   background-color: rgba(255, 255, 255, 0.7);
 }
